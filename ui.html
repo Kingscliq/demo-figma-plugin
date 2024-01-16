@@ -1,4 +1,4 @@
-<h2>Rectangle Creator</h2>
+<!-- <h2>Rectangle Creator</h2>
 <p>Count: <input id="count" value="5"></p>
 <button id="create">Create</button>
 <button id="cancel">Cancel</button>
@@ -14,4 +14,34 @@ document.getElementById('cancel').onclick = () => {
   parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
 }
 
+</script> -->
+
+<div>Hello World, welcome to our first figma plugin</div>
+
+<input type="text" id="search_term" placeholder="Search components..." />
+<select name="" id=""></select>
+<button id="search_btn">Submit</button>
+
+<script>
+  onmessage = e => {
+    const message = e.data.pluginMessage;
+    if (message.type === 'result') {
+      console.log(message.result);
+    }
+  };
+  const searchTerm = document.getElementById('search_term');
+  const searchBtn = document.getElementById('search_btn');
+
+  searchBtn.addEventListener('click', () => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'search',
+          name: 'searchItem',
+          value: searchTerm.value,
+        },
+      },
+      '*'
+    );
+  });
 </script>
