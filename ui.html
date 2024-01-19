@@ -28,6 +28,8 @@
         option.textContent = optionText;
         componentInstanceDropdown.appendChild(option);
       }
+    } else {
+      alert('Please check the component name and type a proper component name');
     }
   };
 
@@ -35,6 +37,8 @@
   const searchBtn = document.getElementById('search_btn');
 
   searchBtn.addEventListener('click', () => {
+    componentInstanceDropdown.innerHTML =
+      '<option value="" disabled selected>Select a Component</option>';
     parent.postMessage(
       {
         pluginMessage: {
