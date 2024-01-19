@@ -1,16 +1,36 @@
 <div><h3>Hello</h3></div>
 
 <input type="text" id="search_term" placeholder="Search components..." />
-<select name="" id=""></select>
+<br /><br />
+<select name="component_instance" id="component_instance_container">
+  <option value="" disabled selected>Select a Component</option>
+</select>
+<br />
+<br />
 <button id="search_btn">Submit</button>
 
 <script>
+  let componentInstanceDropdown = document.getElementById(
+    'component_instance_container'
+  );
+
+  const splitTextByEqualSign = word => word.split('=')[1];
+
   onmessage = e => {
     const message = e.data.pluginMessage;
     if (message.type === 'result') {
-      console.log(message.result);
+      console.log(message?.result);
+      for (let item of message?.result) {
+        const optionText = splitTextByEqualSign(item?.name);
+        const option = document.createElement('option');
+        option.name = item?.name;
+        option.value = optionText;
+        option.textContent = optionText;
+        componentInstanceDropdown.appendChild(option);
+      }
     }
   };
+
   const searchTerm = document.getElementById('search_term');
   const searchBtn = document.getElementById('search_btn');
 

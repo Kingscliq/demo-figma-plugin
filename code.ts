@@ -37,13 +37,11 @@ figma.showUI(__html__);
 
 figma.ui.onmessage = pluginMessage => {
   const searchComponent = (searchText: string) => {
-    console.log(searchText);
     return figma.root.findOne(
       n => n.type === 'COMPONENT_SET' && n.name.includes(searchText)
     );
   };
 
-  console.log('Search term', pluginMessage.value);
   const data = searchComponent(pluginMessage.value);
 
   const searchResults = (data as any).children.map((child: any) => ({
